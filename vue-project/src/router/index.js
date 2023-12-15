@@ -20,31 +20,51 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView ,
+      meta: {
+        requiresAuth: true // Add meta field to indicate protected route
+      }
+
     },
 
     {
       path: '/RentDetail',
       name: 'RentDetail',
-      component: RentDetail 
+      component: RentDetail ,
+      meta: {
+        requiresAuth: true // Add meta field to indicate protected route
+      }
+
     },
 
     {
       path: '/RentFacility',
       name: 'RentFacility',
-      component: RentFacility
+      component: RentFacility,
+      meta: {
+        requiresAuth: true // Add meta field to indicate protected route
+      }
+
     },
 
     {
       path: '/profileEdit',
       name: 'profileEdit',
-      component:profileEdit 
+      component:profileEdit ,
+      meta: {
+        requiresAuth: true // Add meta field to indicate protected route
+      }
+
     },
 
     {
       path: '/history',
       name: 'history',
-      component:history 
+      component:history ,
+      meta: {
+        requiresAuth: true // Add meta field to indicate protected route
+      }
+
     },
     // {
     //   path: '/:pathMatch(.*)*',
@@ -55,5 +75,19 @@ const router = createRouter({
 
   ]
 })
-
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      // User is authenticated, proceed to the route
+      next();
+    } else {
+      // User is not authenticated, redirect to login
+      next('/login');
+    }
+  } else {
+    // Non-protected route, allow access
+   next();
+}
+});
 export default router

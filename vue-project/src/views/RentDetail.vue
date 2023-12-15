@@ -23,6 +23,12 @@
             <label for="exampleFormControlInput1" class="form-label">End Data</label>
             <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
         </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Qty</label>
+            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Qty">
+        </div>
+
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Description</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -31,7 +37,7 @@
         <div class="mb-3">
       
             <button type="button" class=" button btn  btn-lg form-control text-white"> <p class="text-btn">BOOK NOW</p></button>
-            <!-- <ToastExample></ToastExample> -->
+           
         </div>
       
     </div>

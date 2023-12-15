@@ -69,8 +69,14 @@
 
 <script>
 export default {
+    data () {
+        isLoggedIn: false
+    },
     methods: {
         logout() {
+            sessionStorage.removeItem('token');
+      // Set status login menjadi false
+      this.isLoggedIn = false;
             this.$router.push({
                 name: 'Login'
             });

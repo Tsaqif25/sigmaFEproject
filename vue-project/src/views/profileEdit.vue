@@ -2,7 +2,7 @@
 <div class="card text-white">
     <div class="d-flex justify-content-start container m-2">
         <router-link to="/">
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined" style="color: #000;">
                 arrow_back
             </span>
         </router-link>
