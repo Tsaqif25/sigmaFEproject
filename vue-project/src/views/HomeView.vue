@@ -6,9 +6,9 @@
   <img src="" alt="">
   <p class="texthome">Optimize Your Operations with Easy and Fast Inventory Lending.</p>
 
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center align-items-center">
  
-  <router-link to="/RentFacility" class="btn  button btn-primary align-items-center">  Get Started</router-link>
+  <router-link to="/RentFacility" class="btn  button btn-primary  d-flex justify-content-center align-items-center"> <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>  </router-link>
 </div>
 </template>
 
@@ -44,6 +44,7 @@ text-align: center;
 }
 
 .button {
+  margin: auto;
   width: 170px ;
 height: 52px ;
 top: 604px ;

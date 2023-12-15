@@ -1,55 +1,60 @@
 <template>
-<section id="contact">
-    <div class="container  ">
+    <section id="contact">
+        <div class="container  ">
 
-        <div class="row justify-content-center align-items-center ">
-            <div class="col-lg-4">
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-lg-4">
+                    <div class="container">
+                        <form>
+                            <div class="container-fluid">
+                                <div class="mb-2">
+                                    <br>
+                                    <div v-if="erorrMessage" class="alert alert-danger text-center" role="alert">
+                                        {{ erorrMessage }}
+                                    </div>
 
-                <form>
+                                    <p class=" text-center mt-1 judul1"> <img src="../assets/logo sigma.jpg" alt=""
+                                            style="width: 200px;"> <br> Welcome to </p>
+                                    <h5 class="sigma text-center">sigma’s company</h5>
+                                    <br>
+                                    <p class="login">Login</p>
 
-                    <div class="mb-3">
-                        <br>
-                        <div v-if="erorrMessage" class="alert alert-danger text-center" role="alert">
-                            {{erorrMessage}}
-                        </div>
-                        <p class=" text-center mt-2 judul1"> Welcome to </p>
-                        <h5 class="sigma text-center">sigma’s company</h5>
-                        <br>
-                        <p class="login">Login</p>
+                                    <div class="mb-4 input-group">
 
-                        <div class="mb-3 input-group">
+                                        <input type="id" class="form-control" id="id" aria-describedby="emailHelp"
+                                            placeholder="id" v-model="id">
+                                    </div>
 
-                            <input type="id" class="form-control" id="id" aria-describedby="emailHelp" placeholder="id" v-model="id">
-                        </div>
+                                </div>
+                                <div class="mb-3">
 
+                                    <div class="mb-3 input-group">
+                                        <input type="password" class="form-control" id="exampleInputPassword1"
+                                            placeholder="Password" v-model="password">
+                                    </div>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Keep me logged in
+                                    </label>
+                                </div>
+                                <div class="col-lg-3 mt-3">
+                                    <button type="button" class="btn btn-primary" v-on:click="login">Login</button>
+                                </div>
+
+                                <a href="#" class="text-center d-flex justify-content-center mt-4">Forgot your password?</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
 
-                        <div class="mb-3 input-group">
+                </div>
 
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="id">
-                        </div>
-
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Keep me logged in
-                        </label>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                        <button type="button" class="btn btn-primary" v-on:click="login">Login</button>
-                    </div>
-
-                    <a href="#" class="text-center mt-4">Forgot your password?</a>
-                </form>
             </div>
 
         </div>
-
-    </div>
-
-</section>
+    </section>
 </template>
 
 <script>
@@ -60,23 +65,26 @@ export default {
             id: '',
             password: '',
             erorrMessage: null
-
         }
     },
     methods: {
         async login() {
+            console.log("login");
             try {
-                let result = await axios.post()
+                let result = await axios.post('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/login', {
+                    id: this.id,
+                    password: this.password
+                })
 
-                if (result.status == 201) {
+                if (result.status === 200) {
+                    console.log(result.data);
                     this.$router.push({
                         name: 'home'
                     })
                 }
             } catch (error) {
-                console.error('Error during login:', error);
-                this.erorrMessage('Invalid login, please try again')
-
+                // console.log(error.response.data.message);
+                this.erorrMessage = error.response.data.message
             }
         }
     }
@@ -85,7 +93,7 @@ export default {
 
 <style scoped>
 .justify-content-center {
-    min-height: 80vh;
+    min-height: 10vh;
 }
 
 .judul1 {
@@ -144,6 +152,8 @@ a {
 form {
     display: flex;
     flex-direction: column;
+    /* margin-left: 20px; */
+    margin-right: 20px;
 }
 
 .btn {
@@ -152,7 +162,7 @@ form {
     /* Adjust as needed for spacing */
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     form {
         width: 100%;
     }
@@ -160,5 +170,4 @@ form {
     .btn {
         width: 100%;
     }
-}
-</style>
+} */</style>

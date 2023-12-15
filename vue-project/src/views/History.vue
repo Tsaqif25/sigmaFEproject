@@ -5,8 +5,9 @@
       <h1>History</h1>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-          <div class="card mb-3 mt-4" style="max-width: 540px;">
-            <div class="row" v-for="(room, index) in history" :key="index">
+          <div class="row flex-nowrap" v-for="(room, index) in history" :key="index">
+          <div class="card mb-3 mt-4 " style="max-width: 540px;">
+          
               <div class="col-4 d-flex align-items-center">
                 <img :src="room.images" style="width: 80px;" class="m-3" alt="...">
               </div>
@@ -17,6 +18,8 @@
                 </div>
               </div>
             </div>
+
+            
           </div>
         </div>
       </div>
@@ -47,3 +50,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@media (max-width: 768px) {
+   .card {
+        display: flex;
+        justify-content: space-between;
+        max-width: 340px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+  }
+</style>

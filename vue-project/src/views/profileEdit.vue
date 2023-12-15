@@ -13,17 +13,18 @@
         </div>
 
         <div class="card-body mb-4 text-center">
-            <img src="../assets/03. Foto Profil IG.png" width="134px" height="134px" top="121px" alt="">
-            <br><br><br>
-            <div class="d-flex justify-content-center">
-                <div class="input-group">
-                    <div class="custom-file ">
-                        <input type="file" class="custom-file-input d-flex justify-content-center" id="inputGroupFile" @change="handleImageChange" accept="image/*" tes />
-                        <label class="custom-file-label text-center" for="inputGroupFile">Choose file</label>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <img src="../assets/03. Foto Profil IG.png" width="134px" height="134px" alt="">
+  <br><br><br>
+  <div class="d-flex justify-content-center">
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile" @change="handleImageChange" accept="image/*" tes />
+        <label class="custom-file-label text-center" for="inputGroupFile">Choose file</label>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </div>
     <div class="d-flex justify-content-end">
@@ -51,12 +52,14 @@
                         <input v-model="user.password" type="password" class="form-control" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
+                    <br><br><br><br><br><br>
                 </form>
             </div>
 
         </div>
     </div>
 </div>
+
 </template>
 
 <script>
@@ -74,7 +77,18 @@ export default {
         };
     },
     methods: {
-
+        updateProfile() {
+            // Use Axios to make a PUT or POST request to update the user's profile
+            axios.put('/api/update-profile', this.user)
+                .then(response => {
+                    // Handle success
+                    console.log('Profile updated successfully:', response.data);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error updating profile:', error);
+                });
+        },
         handleImageChange(event) {
             const file = event.target.files[0];
             // Validate the file type and size (optional)
@@ -89,18 +103,7 @@ export default {
             };
             reader.readAsDataURL(file);
         },
-        updateProfile() {
-            // Use Axios to make a PUT or POST request to update the user's profile
-            axios.put('/api/update-profile', this.user)
-                .then(response => {
-                    // Handle success
-                    console.log('Profile updated successfully:', response.data);
-                })
-                .catch(error => {
-                    // Handle error
-                    console.error('Error updating profile:', error);
-                });
-        },
+
     },
 }
 </script>
