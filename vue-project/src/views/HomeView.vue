@@ -1,8 +1,13 @@
 <template>
   <div> 
     <navbar></navbar>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br>
     <p class="judulhome">Welcome, {{ profile.name }}</p>
+    <p class="text-center">
+      <img src="../assets/undraw_Online_test_re_kyfx.png" width="277px" alt="" srcset="">
+    </p>
+  
+   
 
     <img src="" alt="">
     <p class="texthome">Optimize Your Operations with Easy and Fast Inventory Lending.</p>
@@ -12,7 +17,9 @@
         <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>
       </router-link>
     </div>
+    <br><br><br>
   </div>
+  
 </template>
 
 <script>
