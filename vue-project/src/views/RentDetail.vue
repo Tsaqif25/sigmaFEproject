@@ -112,11 +112,7 @@ export default {
     components: {
         navbar
     },
-    // setup() {
 
-    //     toast.success("Success Booked !", {
-    //         autoClose: 2000,
-    //     }); // ToastOptions
 
 
     // },

@@ -13,7 +13,7 @@
         </div>
 
         <div class="card-body mb-4 text-center">
-            <img src="../assets/03. Foto Profil IG.png" width="134px" height="134px" alt="">
+            <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/user-profiles/'+img" alt="Profile Picture" style="border-radius: 50%; width: 50px; height: 50px;">
             <br><br><br>
             <div class="d-flex justify-content-center">
                 <div class="input-group">
@@ -61,17 +61,19 @@
 </template>
 
 <script>
+import { toast } from 'vue3-toastify';
 import axios from 'axios';
 export default {
     data() {
 return {
         
     profile: {
-        name: 'ttdssds',
+        name: '',
         email: '',
         phone: '',
         employeeId: '',
         password: '',
+        img:''
     }
         }    },
 
@@ -89,6 +91,7 @@ return {
         let data = result.data
         console.log(data)
         this.profile = data.profile ;
+        this.img = data.profile.images;
     }
     catch(error) {
         console.error('Error fetching profile data:', error);
@@ -96,28 +99,35 @@ return {
     },
 
     methods: {
+  async updateProfile() {
+    try {
+      const id = this.$route.params.id;
+      const token = sessionStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      };
 
-    async updateProfile(){
+      let result = await axios.put(`https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile`, {
+        name: this.profile.name,
+        email: this.profile.email,
+        phone: this.profile.phone,
+        password:this.profile.password
+      }, config);
 
-        try {
-            const id = this.$route.params.id
-        const token = sessionStorage.getItem('token');
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        };
-        let result = await axios.put('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile',config)
-        let data = result.data ;
-        console.log('profile success',data)
+      let data = result.data;
+      console.log('Profile update success', data);
+      toast.success("Berhasil Diedit ", {
+                autoClose: 1000,
+            });
+    } catch (error) {
+      console.log('Profile update failed', error);
+    }
+  },
+},
 
-        } catch (error) {
-            console.log('not success',error)
-        }
-          
-        }
-    },
     handleImageChange(event) {
         const file = event.target.files[0];
         // Validate the file type and size (optional)

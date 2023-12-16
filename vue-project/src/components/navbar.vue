@@ -1,82 +1,92 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-lg mb-2 ">
+<div>
+    <nav class="navbar navbar-expand-lg mb-2 ">
 
-            <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"
-                style="color:  background-color: #003F62;;">
-                <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" style="color:  background-color: #003F62;;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="dropdown">
+            <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/user-profiles/'+img" alt="Profile Picture" style="border-radius: 50%; width: 32px; height: 32px;">
             </button>
-            <div class="dropdown">
-                <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../assets/03. Foto Profil IG.PNG" alt="Profile Picture"
-                        style="border-radius: 50%; width: 32px; height: 32px;">
-                </button>
-                <ul class="dropdown-menu">
-                    <li class=" d-flex justify-content-between">
-                        <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
-                        <router-link to="/profileEdit" class="dropdown-item  d-flex justify-content-between "
-                            active-class="active1"> Edit Profile <i class="material-icons">chevron_right </i></router-link>
-                    </li>
-                    <li>
-                        <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
-                        <router-link to="" class="dropdown-item  d-flex justify-content-between " active-class="active1"
-                            @click="logout"> Exit <i class="material-icons">logout </i></router-link>
-                    </li>
+            <ul class="dropdown-menu">
+                <li class=" d-flex justify-content-between">
+                    <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
+                    <router-link to="/profileEdit" class="dropdown-item  d-flex justify-content-between " active-class="active1"> Edit Profile <i class="material-icons">chevron_right </i></router-link>
+                </li>
+                <li>
+                    <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
+                    <router-link to="" class="dropdown-item  d-flex justify-content-between " active-class="active1" @click="logout"> Exit <i class="material-icons">logout </i></router-link>
+                </li>
 
-                </ul>
-            </div>
-
-            <div class="collapse navbar-collapse  w-full" id="navbarText" style="width: 100%; background-color: #003F62;
-;">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="">
-                        <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
-                        <router-link to="/" active-class="active"><i class="material-icons">home </i> Home</router-link>
-                    </li>
-
-                    <li class="">
-                        <!-- <a href="#" class="dashboard"><i class="material-symbols-outlined"> description </i> <span>History</span></a> -->
-                        <router-link to="/RentFacility" active-class="active"><i class="material-icons">description</i>
-                            <span class="">Rental</span></router-link>
-                    </li>
-                    <li class="">
-                        <router-link to="/history" active-class="active"><i class="material-icons">description</i> <span
-                                class="">History</span></router-link>
-                    </li>
-
-                </ul>
-
-            </div>
-        </nav>
-
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
+            </ul>
         </div>
+
+        <div class="collapse navbar-collapse  w-full" id="navbarText" style="width: 100%; background-color: #003F62;
+;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="">
+                    <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
+                    <router-link to="/" active-class="active"><i class="material-icons">home </i> Home</router-link>
+                </li>
+
+                <li class="">
+                    <!-- <a href="#" class="dashboard"><i class="material-symbols-outlined"> description </i> <span>History</span></a> -->
+                    <router-link to="/RentFacility" active-class="active"><i class="material-icons">description</i>
+                        <span class="">Rental</span></router-link>
+                </li>
+                <li class="">
+                    <router-link to="/history" active-class="active"><i class="material-icons">description</i> <span class="">History</span></router-link>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
     </div>
+</div>
 </template>
 
 <script>
 import axios from 'axios';
 export default {
-    data () {
-        isLoggedIn: false
+    data() {
+        return {
+            isLoggedIn: false,
+            img: ''
+        }
+    },
+    async mounted() {
+        try {
+            const id = this.$route.params.id
+            const token = sessionStorage.getItem('token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            };
+            let result = await axios.get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile', config)
+            let data = result.data
+            console.log(data)
+            this.img = data.profile.images;
+        } catch (error) {
+            console.error('Error fetching profile data:', error);
+        }
     },
     methods: {
         logout() {
             sessionStorage.removeItem('token');
-      // Set status login menjadi false
-      this.isLoggedIn = false;
+            // Set status login menjadi false
+            this.isLoggedIn = false;
             this.$router.push({
                 name: 'Login'
             });
         },
-        search() {
-axios.get('')
-.then
-        }
-
     }
 }
 </script>
@@ -127,7 +137,6 @@ ul li .active {
     color: #003f62;
 }
 
-
 ul li a {
     padding: 5px 10px 5px 20px;
     line-height: 30px;
@@ -144,4 +153,5 @@ ul li a i {
     position: relative;
     margin-right: 10px;
     top: 6px;
-}</style>
+}
+</style>

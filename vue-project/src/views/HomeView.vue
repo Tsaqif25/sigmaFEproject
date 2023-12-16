@@ -1,27 +1,55 @@
 <template>
   <div> 
-  <navbar></navbar>
-  <br><br><br><br><br><br><br><br><br><br>
-  <p class="judulhome">Welcome, Rafi Purwa Syahputra!</p>
+    <navbar></navbar>
+    <br><br><br><br><br><br><br><br><br><br>
+    <p class="judulhome">Welcome, {{ profile.name }}</p>
 
-  <img src="" alt="">
-  <p class="texthome">Optimize Your Operations with Easy and Fast Inventory Lending.</p>
+    <img src="" alt="">
+    <p class="texthome">Optimize Your Operations with Easy and Fast Inventory Lending.</p>
 
-  <div class="d-flex justify-content-center align-items-center">
- 
-  <router-link to="/RentFacility" class="btn  button btn-primary  d-flex justify-content-center align-items-center"> <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>  </router-link>
-</div>
-</div>
+    <div class="d-flex justify-content-center align-items-center">
+      <router-link to="/RentFacility" class="btn button btn-primary d-flex justify-content-center align-items-center">
+        <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script>
-import navbar from '../components/navbar.vue'
+import axios from 'axios';
+import navbar from '../components/navbar.vue';
+
 export default {
-    components: {
-        navbar
-    },
-}
+  data() {
+    return {
+      profile: {
+        name: '',
+      }
+    };
+  },
+  async mounted() {
+    try {
+      const token = sessionStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      };
+      let result = await axios.get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile', config);
+      let data = result.data;
+      console.log(data);
+      this.profile.name = data.profile.name;
+    } catch (error) {
+      console.error('Error fetching profile data:', error);
+    }
+  },
+  components: {
+    navbar
+  },
+};
 </script>
+
 
 <style scoped>
 .judulhome{
