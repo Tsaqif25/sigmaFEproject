@@ -7,16 +7,6 @@
                 style="color:  background-color: #003F62;;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle profileDropdown" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-    </button>
-    <div class="dropdown-menu" aria-labelledby="profileDropdown">
-      <a class="dropdown-item" @click="editPhoto">Edit Photo</a>
-      <a class="dropdown-item" @click="signOut">Sign Out</a>
-    </div>
-  </div> -->
             <div class="dropdown">
                 <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="../assets/03. Foto Profil IG.PNG" alt="Profile Picture"
@@ -68,6 +58,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data () {
         isLoggedIn: false
@@ -80,6 +71,10 @@ export default {
             this.$router.push({
                 name: 'Login'
             });
+        },
+        search() {
+axios.get('')
+.then
         }
 
     }
@@ -132,11 +127,6 @@ ul li .active {
     color: #003f62;
 }
 
-/* ul li .active1 {
-  background-color: #f52020;
-    border-radius: 5px;
-    color: #003f62;
-} */
 
 ul li a {
     padding: 5px 10px 5px 20px;

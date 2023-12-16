@@ -13,18 +13,17 @@
         </div>
 
         <div class="card-body mb-4 text-center">
-  <img src="../assets/03. Foto Profil IG.png" width="134px" height="134px" alt="">
-  <br><br><br>
-  <div class="d-flex justify-content-center">
-    <div class="input-group">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile" @change="handleImageChange" accept="image/*" tes />
-        <label class="custom-file-label text-center" for="inputGroupFile">Choose file</label>
-      </div>
-    </div>
-  </div>
-</div>
-
+            <img src="../assets/03. Foto Profil IG.png" width="134px" height="134px" alt="">
+            <br><br><br>
+            <div class="d-flex justify-content-center">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile" @change="handleImageChange" accept="image/*" tes />
+                        <label class="custom-file-label text-center" for="inputGroupFile">Choose file</label>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="d-flex justify-content-end">
@@ -33,25 +32,25 @@
                 <form @submit.prevent="updateProfile">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input v-model="user.name" type="text" class="form-control" id="name" aria-describedby="nameHelp">
+                        <input v-model="profile.name" type="text" class="form-control" id="name" aria-describedby="nameHelp">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input v-model="user.email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input v-model="profile.email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input v-model="user.phone" type="number" class="form-control" id="phone" aria-describedby="phoneHelp">
+                        <input v-model="profile.phone" type="number" class="form-control" id="phone" aria-describedby="phoneHelp">
                     </div>
                     <div class="mb-3">
                         <label for="employeeId" class="form-label">ID Pegawai</label>
-                        <input v-model="user.employeeId" type="number" class="form-control" id="employeeId" aria-describedby="employeeIdHelp">
+                        <input v-model="profile.userId" type="number" class="form-control" id="employeeId" aria-describedby="employeeIdHelp">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input v-model="user.password" type="password" class="form-control" id="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                        <input v-model="profile.password" type="password" class="form-control" id="password">
+                    </div> 
+                    <button type="submit" class="btn btn-primary" v-on:click="updateProfile">Update</button>
                     <br><br><br><br><br><br>
                 </form>
             </div>
@@ -59,53 +58,81 @@
         </div>
     </div>
 </div>
-
 </template>
 
 <script>
 import axios from 'axios';
 export default {
     data() {
-        return {
-            user: {
-                name: '',
-                email: '',
-                phone: '',
-                employeeId: '',
-                password: '',
-            },
-        };
-    },
-    methods: {
+return {
         
-        updateProfile() {
-            // Use Axios to make a PUT or POST request to update the user's profile
-            axios.put('/api/update-profile', this.user)
-                .then(response => {
-                    // Handle success
-                    console.log('Profile updated successfully:', response.data);
-                })
-                .catch(error => {
-                    // Handle error
-                    console.error('Error updating profile:', error);
-                });
-        },
-        handleImageChange(event) {
-            const file = event.target.files[0];
-            // Validate the file type and size (optional)
-            // ...
-            // Read the file content
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                // Get the image data URL
-                const imageDataUrl = e.target.result;
-                // Update the image source with the new data URL
-                this.profileImage = imageDataUrl;
-            };
-            reader.readAsDataURL(file);
-        },
+    profile: {
+        name: 'ttdssds',
+        email: '',
+        phone: '',
+        employeeId: '',
+        password: '',
+    }
+        }    },
 
+    async mounted() {
+        try {
+        const id = this.$route.params.id
+        const token = sessionStorage.getItem('token');
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        let result = await axios.get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile',config)
+        let data = result.data
+        console.log(data)
+        this.profile = data.profile ;
+    }
+    catch(error) {
+        console.error('Error fetching profile data:', error);
+    }
     },
+
+    methods: {
+
+    async updateProfile(){
+
+        try {
+            const id = this.$route.params.id
+        const token = sessionStorage.getItem('token');
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        let result = await axios.put('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/profile',config)
+        let data = result.data ;
+        console.log('profile success',data)
+
+        } catch (error) {
+            console.log('not success',error)
+        }
+          
+        }
+    },
+    handleImageChange(event) {
+        const file = event.target.files[0];
+        // Validate the file type and size (optional)
+        // ...
+        // Read the file content
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            // Get the image data URL
+            const imageDataUrl = e.target.result;
+            // Update the image source with the new data URL
+            this.profileImage = imageDataUrl;
+        };
+        reader.readAsDataURL(file);
+    },
+
 }
 </script>
 

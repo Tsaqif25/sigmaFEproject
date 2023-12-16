@@ -96,7 +96,7 @@ export default {
             let data = result.data.data
             console.log(result);
         
-            // this.$router.push({ path: '/RentFacility' });
+            
           
             setTimeout(() => {
                 // Redirect ke halaman 'RentFacility'
@@ -104,7 +104,7 @@ export default {
             }, 2000); 
 
             toast.success("Success Booked !", {
-                autoClose: 6000,
+                autoClose: 1000,
             });
 
         }
