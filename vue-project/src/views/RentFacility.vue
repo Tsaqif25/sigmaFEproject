@@ -4,11 +4,11 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                    type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+                    type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Inventory</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+                    type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Facility</button>
             </li>
         </ul>
         <div class="container">
@@ -17,11 +17,11 @@
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
                     <div class="row px-4" v-for="(room, index) in roomInventory" :key="room.id">
-                        <router-link class="router" to="/RentDetail">
+                        <router-link class="router" :to="'/RentDetail/'+room.id">
                             <div class="card mb-3 mt-4" style="max-width: 540px;">
                                 <div class="col-md-4 flex-nowrap">
                                     <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/inventories/' + room.images"
-                                        style="width: 80px;" class="m-3 " alt="...">
+                                        style="width: 180px;" class="m-3 " alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -43,11 +43,11 @@
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 
                     <div class="row px-4" v-for="(room, index) in roomFacility " :key="room.id">
-                        <router-link class="router" to="/RentDetail">
+                        <router-link class="router" :to="'/RentDetail/'+room.id">
                             <div class="card mb-3 mt-4 " style="max-width: 540px;">
                                 <div class="col-4 d-flex align-items-center">
                                     <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/inventories/' + room.images"
-                                        style="width: 80px;" class="m-3 " alt="...">
+                                        style="width: 180px;" class="m-3 " alt="...">
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body ">
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import axios from 'axios'
 import navbar from '../components/navbar.vue'
 export default {
@@ -90,9 +92,17 @@ export default {
     },
 
     async mounted() {
-        let result = await axios.get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/inventories');
-        console.log(result.data);
+        const token = sessionStorage.getItem('token');
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        let result = await axios.get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/inventories', config);
+
         let data = result.data.data
+        console.log(data);
         this.roomFacility = data.filter(item => item.category == 'facility')
         this.roomInventory = data.filter(item => item.category == 'inventory')
 
@@ -156,4 +166,5 @@ export default {
 .stok {
     font-size: px;
     font-weight: 400;
-}</style>
+}
+</style>

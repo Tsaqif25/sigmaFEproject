@@ -41,8 +41,14 @@ export default {
     };
   },
   async mounted() {
+    const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
     try {
-      let result = await axios.get('./src/data/inventory.json');
+      let result = await axios.get('./src/data/inventory.json',config);
       this.history = result.data.data;
     } catch (error) {
       console.error("Error fetching data:", error);

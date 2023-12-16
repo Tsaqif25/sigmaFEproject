@@ -66,6 +66,7 @@ export default {
         }
     },
     methods: {
+        
     async login() {
       try {
         let result = await axios.post('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/login', {
@@ -88,13 +89,13 @@ export default {
     }
   },
 
-  created() {
-    // Check if the user is already logged in based on the token in sessionStorage
-    const storedToken = sessionStorage.getItem('token');
-    if (storedToken) {
-      this.isLoggedIn = true;
-    }
-  },
+//   created() {
+//     // Check if the user is already logged in based on the token in sessionStorage
+//     const storedToken = sessionStorage.getItem('token');
+//     if (storedToken) {
+//       this.isLoggedIn = true;
+//     }
+//   },
   }
 
     

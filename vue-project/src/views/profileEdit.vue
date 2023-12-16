@@ -77,6 +77,7 @@ export default {
         };
     },
     methods: {
+        
         updateProfile() {
             // Use Axios to make a PUT or POST request to update the user's profile
             axios.put('/api/update-profile', this.user)

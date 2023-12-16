@@ -1,4 +1,5 @@
 <template>
+  <div> 
   <navbar></navbar>
   <br><br><br><br><br><br><br><br><br><br>
   <p class="judulhome">Welcome, Rafi Purwa Syahputra!</p>
@@ -9,6 +10,7 @@
   <div class="d-flex justify-content-center align-items-center">
  
   <router-link to="/RentFacility" class="btn  button btn-primary  d-flex justify-content-center align-items-center"> <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>  </router-link>
+</div>
 </div>
 </template>
 
