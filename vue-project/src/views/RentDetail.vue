@@ -26,10 +26,7 @@
                         v-model="end">
                 </div>
 
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Qty</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Qty" v-model="qty">
-                </div>
+               
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
@@ -66,7 +63,7 @@ export default {
             name: '',
             start: '',
             end: '',
-            qty: '',
+         
             descripsi1:''
 
 
@@ -89,7 +86,7 @@ export default {
             let result = await axios.post(`https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/inventories/${id}/book`, {
                 startDate: this.start,
                 endDate: this.end,
-                qty: this.qty,
+           
                 description: this.descripsi1
             }, config);
 

@@ -27,8 +27,8 @@
                                     <div class="card-body">
                                         <h1 class="room-name">{{ room.name }}</h1>
                                         <p class="card-text descripsi">{{ room.description }}</p>
-                                        <p class="card-text stok">Jumlah Stok Barang : {{ room.qty }}</p>
-                                        <button type="button" class="btn btn-secondary btn-sm" v-if="room.status"
+                                  
+                                        <button type="button" class="btn btn-secondary btn-sm" v-if="room.stock"
                                             @click="bookRoom(index)">Avaliable</button>
                                         <button type="button" v-else class="btn btn-secondary btn-sm" disabled>
                                             Booked
@@ -53,7 +53,7 @@
                                     <div class="card-body ">
                                         <h1 class=" room-name">{{ room.name }}</h1>
                                         <p class="card-text descripsi ">{{ room.description }}</p>
-                                        <p class="card-text stok">Jumlah Stok Barang : {{ room.qty }}</p>
+                                       
                                         <button type="button" class="btn btn-secondary btn-sm  text-center"
                                             v-if="room.status" @click="bookRoom(index)"> <span class="avaliable">.</span>
                                             Avaliable</button>
@@ -110,7 +110,9 @@ export default {
         // console.log("Inventories data: ", result1.data);
         // this.roomInventory = result1.data.data;
     },
+    updated(){
 
+    },
     methods: {
         bookRoom() {
             this.$router.push({

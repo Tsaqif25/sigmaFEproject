@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <navbar></navbar>
+
     <br><br>
     <p class="judulhome">Welcome, {{ profile.name }}</p>
     <p class="text-center">

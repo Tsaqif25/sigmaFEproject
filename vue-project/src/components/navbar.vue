@@ -46,7 +46,12 @@
     </nav>
 
     <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
+        <input type="text" v-model="searchQuery" @input="doSearch" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
+
+        <button @click="doSearch(search)">Search</button>
+        <div v-for="result in results" :key="result.id">
+        <p>{{ result.name }}</p>
+        </div>
     </div>
 </div>
 </template>
@@ -57,9 +62,16 @@ export default {
     data() {
         return {
             isLoggedIn: false,
-            img: ''
+            img: '' ,
+            search: '',
+      results: []
         }
     },
+    watch: {
+    search(value) {
+      this.doSearch(value);
+    }
+  },  
     async mounted() {
         try {
             const id = this.$route.params.id
@@ -87,6 +99,14 @@ export default {
                 name: 'Login'
             });
         },
+        doSearch(value) {
+  axios
+    .get('https://tnrxkmc3-8080.asse.devtunnels.ms/api/v1/inventories?q=' + value)
+    .then((response) => {this.results = response.data})
+    .catch(e => console.log(e));
+},
+
+
     }
 }
 </script>

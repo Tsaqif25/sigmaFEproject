@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar></navbar>
+    
     <div class="container">
       <h1>History</h1>
       <div class="tab-content" id="myTabContent">
