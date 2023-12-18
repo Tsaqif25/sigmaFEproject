@@ -3,8 +3,8 @@
 
 
         <navbar></navbar>
-        <br><br><br><br><br>
-        <div class="card mb-5" style="width: 100%;">
+
+        <div class="" style="width: 100%;" >
 
             <div class="container ">
                 <h3 class="text-center">
@@ -12,7 +12,7 @@
                         style="width: 100px;">
                     <br>
                     <p>{{ name }}</p>
-                    <p>{{ descripsi }}</p>
+                    <p class="deskripsi">{{ descripsi }}</p>
                 </h3>
                 <br>
                 <div class="mb-3">
@@ -144,6 +144,15 @@ export default {
     gap: 10px;
     background-color: #003F62;
     ;
+
+}
+.deskripsi{
+    font-family: Inter;
+font-size: 12px;
+font-weight: 400;
+line-height: 15px;
+letter-spacing: 0.5px;
+text-align: center;
 
 }
 

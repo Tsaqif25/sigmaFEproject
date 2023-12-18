@@ -12,7 +12,7 @@
             <ul class="dropdown-menu">
                 <li class=" d-flex justify-content-between">
                     <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
-                    <router-link to="/profileEdit" class="dropdown-item  d-flex justify-content-between " active-class="active1"> Edit Profile <i class="material-icons">chevron_right </i></router-link>
+                    <router-link to="/profileEdit" class="dropdown-item  d-flex justify-content-between " active-class="active1"> Profile <i class="material-icons">chevron_right </i></router-link>
                 </li>
                 <li>
                     <!-- <a href="#" class="dashboard"><i class="material-icons">dashboard</i> <span>Rental</span></a> -->
@@ -48,7 +48,7 @@
     <div class="mb-3">
         <input type="text" v-model="searchQuery" @input="doSearch" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
 
-        <button @click="doSearch(search)">Search</button>
+      <br>
         <div v-for="result in results" :key="result.id">
         <p>{{ result.name }}</p>
         </div>

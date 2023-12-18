@@ -10,8 +10,8 @@
    
 
     <img src="" alt="">
-    <p class="texthome">Optimize Your Operations with Easy and Fast Inventory Lending.</p>
-
+    <p class="texthome">Optimize Your Operations with <br> Easy and Fast Inventory <br> Lending.</p>
+    <br>
     <div class="d-flex justify-content-center align-items-center">
       <router-link to="/RentFacility" class="btn button btn-primary d-flex justify-content-center align-items-center">
         <span class="text-center d-flex align-items-center justify-content-center">Get Started</span>
