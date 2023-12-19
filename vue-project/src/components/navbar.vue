@@ -1,6 +1,6 @@
 <template>
 <div>
-    <nav class="navbar navbar-expand-lg mb-2 ">
+    <nav class="navbar navbar-expand-lg mb-4 z-3">
 
         <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" style="color:  background-color: #003F62;;">
             <span class="navbar-toggler-icon"></span>
@@ -45,14 +45,14 @@
         </div>
     </nav>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <input type="text" v-model="searchQuery" @input="doSearch" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search">
 
       <br>
         <div v-for="result in results" :key="result.id">
         <p>{{ result.name }}</p>
         </div>
-    </div>
+    </div> -->
 </div>
 </template>
 

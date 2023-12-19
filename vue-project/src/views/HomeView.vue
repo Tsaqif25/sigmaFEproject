@@ -1,13 +1,11 @@
 <template>
-  <div> 
-
+  <div>
+    <navbar></navbar>
     <br><br>
     <p class="judulhome">Welcome, {{ profile.name }}</p>
     <p class="text-center">
       <img src="../assets/undraw_Online_test_re_kyfx.png" width="277px" alt="" srcset="">
     </p>
-  
-   
 
     <img src="" alt="">
     <p class="texthome">Optimize Your Operations with <br> Easy and Fast Inventory <br> Lending.</p>
@@ -19,7 +17,6 @@
     </div>
     <br><br><br>
   </div>
-  
 </template>
 
 <script>
@@ -27,6 +24,9 @@ import axios from 'axios';
 import navbar from '../components/navbar.vue';
 
 export default {
+  components: {
+    navbar
+  },
   data() {
     return {
       profile: {
@@ -59,38 +59,37 @@ export default {
 
 
 <style scoped>
-.judulhome{
+.judulhome {
   font-family: Lato;
-font-size: 20px;
-font-weight: 700;
-line-height: 24px;
-letter-spacing: 0.01em;
-text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  text-align: center;
 
 }
+
 .texthome {
   font-family: Lato;
-font-size: 20px;
-font-style: italic;
-font-weight: 400;
-line-height: 32px;
-letter-spacing: 0em;
-text-align: center;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: center;
 
 
 }
 
 .button {
   margin: auto;
-  width: 170px ;
-height: 52px ;
-top: 604px ;
-left: 108px ;
-border-radius: 40px ;
-background-color:  #003F62;
-;
+  width: 170px;
+  height: 52px;
+  top: 604px;
+  left: 108px;
+  border-radius: 40px;
+  background-color: #003F62;
+  ;
 
 }
-
-
 </style>

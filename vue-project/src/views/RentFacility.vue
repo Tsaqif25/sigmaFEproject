@@ -12,43 +12,41 @@
             </li>
         </ul>
         <div class="container">
-            
+
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                     tabindex="0">
                     <nav>
 
-                   
-                    <div class="row px-4" v-for="(room, index) in roomInventory" :key="room.id">
-                        <router-link class="router" :to="'/RentDetail/'+room.id">
-                            <div class="card mb-3 mt-4 d-flex flex-row" style="max-width: 540px;">
-                                <div class="col-md-4 d-flex align-items-center ">
-                                    <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/inventories/' + room.images"
-                                    style="width: 79px; height: 79px;" class="m-3 facility " alt="...">
-                                </div>
-                                <div class="col-md-8 float-right">
-                                    <div class="card-body">
-                                        <h5 class="room-name">{{ room.name }}</h5>
-                                        <p class="card-text descripsi">{{ room.description }}</p>
-                                  
-                                        <button type="button" class="btn btn-secondary btn-sm" v-if="room.stock"
-                                            @click="bookRoom(index)">Avaliable</button>
-                                        <button type="button" v-else class="btn btn-secondary btn-sm" disabled>
-                                            Booked
-                                        </button>
+
+                        <div class="row px-4" v-for="(room, index) in roomInventory" :key="room.id">
+                            <router-link class="router" :to="'/RentDetail/' + room.id">
+                                <div class="card mb-3 mt-4 d-flex flex-row" style="max-width: 540px;">
+                                    <div class="col-md-4 d-flex align-items-center ">
+                                        <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/inventories/' + room.images"
+                                            style="width: 79px; height: 79px;" class="m-3 facility " alt="...">
+                                    </div>
+                                    <div class="col-md-8 float-right">
+                                        <div class="card-body">
+                                            <h5 class="room-name">{{ room.name }}</h5>
+                                            <p class="card-text descripsi">{{ room.description }}</p>
+
+                                            <button type="button" class="btn btn-sm"
+                                                :class="room.stock == 'inStock' ? 'btn-success' : 'btn-secondary'">{{
+                                                    room.stock }}</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </router-link>
-                    </div>
-                </nav>
+                            </router-link>
+                        </div>
+                    </nav>
                 </div>
 
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 
-                    <div class="row px-4" v-for="(room, index) in roomFacility " :key="room.id">
-                        <router-link class="router" :to="'/RentDetail/'+room.id">
+                    <div class="row px-4" v-for="(room, index) in roomFacility " :key="room.id">                        
+                        <router-link class="router" :to="'/RentDetail/' + room.id">
                             <div class="card mb-3 mt-4 d-flex flex-row " style="max-width: 540px;">
                                 <div class="col-4 d-flex align-items-center">
                                     <img :src="'https://tnrxkmc3-8080.asse.devtunnels.ms/upload/inventories/' + room.images"
@@ -58,14 +56,11 @@
                                     <div class="card-body ">
                                         <h2 class=" room-name">{{ room.name }}</h2>
                                         <h5 class="card-text descripsi ">{{ room.description }}</h5>
-                                       
-                                        <button type="button" class="btn btn-secondary btn-sm  text-center"
-                                            v-if="room.status" @click="bookRoom(index)"> <span class="avaliable">.</span>
-                                            Avaliable</button>
-                                        <button type="button" v-else class="btn btn-secondary btn-sm " disabled>
-                                            <span class="booked">.</span> Booked
-                                        </button>
 
+                                        <span class="badge p-2" :class="room.stock == 'inStock' ? 'bg-success' : 'bg-secondary'">
+                                            <span v-if="room.stock == 'inStock'">Available</span>
+                                            <span v-else>Unavailable</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +110,7 @@ export default {
         // console.log("Inventories data: ", result1.data);
         // this.roomInventory = result1.data.data;
     },
-    updated(){
+    updated() {
 
     },
     methods: {
@@ -135,35 +130,37 @@ export default {
     font-size: 1.0rem;
 
 }
+
 .card {
     border: 2px solid;
 }
+
 button {
-    width: 89px ;
-/* height: 22px ;
+    width: 89px;
+    /* height: 22px ;
 top: 72px ;
 left: 118px ; */
-border-radius: 18px ;
+    border-radius: 18px;
 
 }
 
 .room-name {
     font-family: Rubik;
-font-size: 18px;
-font-weight: 600;
-line-height: 22px;
-/* letter-spacing: 0em; */
-text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    /* letter-spacing: 0em; */
+    text-align: left;
 
 }
 
 .descripsi {
-  font-family: Inter; 
-font-size: 13px;
-font-weight: 400; 
-line-height: 18px;
- letter-spacing: 0.5px; 
-text-align: left;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-align: left;
 
 }
 
@@ -208,5 +205,4 @@ text-align: left;
 .facility {
     border: 2px solid;
 }
-
 </style>
