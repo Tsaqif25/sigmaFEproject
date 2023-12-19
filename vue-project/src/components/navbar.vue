@@ -1,6 +1,6 @@
 <template>
 <div>
-    <nav class="navbar navbar-expand-lg mb-4 z-3">
+    <nav class="navbar navbar-expand-lg mb-2 z-3">
 
         <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" style="color:  background-color: #003F62;;">
             <span class="navbar-toggler-icon"></span>

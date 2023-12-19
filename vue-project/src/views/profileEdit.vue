@@ -41,7 +41,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="employeeId" class="form-label">ID Pegawai</label>
-                        <input v-model="profile.userId" type="number" class="form-control" id="employeeId" aria-describedby="employeeIdHelp" name="userId">
+                        <input v-model="profile.userId" type="number" class="form-control" id="employeeId" aria-describedby="employeeIdHelp" name="userId" disabled>
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>

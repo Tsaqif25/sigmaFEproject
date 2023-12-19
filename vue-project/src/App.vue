@@ -1,6 +1,7 @@
 <template>
-  <router-view></router-view> 
-  <!-- <testing></testing> -->
+  <div class="col-md-4 offset-md-4">
+    <router-view></router-view> 
+  </div>  
 </template>
 
 <script>
